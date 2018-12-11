@@ -1,0 +1,15 @@
+object card
+	string url
+	string forumname
+	string vendorname
+	string category
+	list keywords
+	...string keyword
+	document (however Elastic likes it, string?) summary (https://www.elastic.co/guide/en/elasticsearch/reference/current/text.html)
+				(Everything would pretty much be a string that gets sent as either a `keyword` or `text` field in elastic)
+				(Exception being evidences)
+	list evidences
+		...object evidence
+			boolean isbinary
+			string fileName
+			string text

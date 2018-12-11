@@ -1,0 +1,22 @@
+{
+	"url": "the URL of the thing we found",
+	"forumname": "name of the venue where we found it",
+	"vendorname": "name of the primary actor involved",
+	"category": "category of finding (carding, reship, etc)",
+	"keywords": [
+		"someKeyWord",
+		"anotherKeyWord"
+	],
+	"summary": "Full-text English translation or summary of the finding",
+	"evidences": [{
+			"isBinary": true,
+			"fileName": "screencap.png",
+			"text": "someBase64Bytes"
+		},
+		{
+			"isBinary": false,
+			"fileName": "transcript.txt",
+			"text": "Some Unicode text blah blah"
+		}
+	]
+}
