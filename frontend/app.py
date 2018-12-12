@@ -7,7 +7,23 @@ es = Elasticsearch(os.environ.get("ES_HOST"), port=os.environ.get("ES_PORT"))
 
 @app.route('/')
 def home():
+    return render_template('welcome.html')
+
+@app.route('/search')
+def search():
     return render_template('search.html')
+
+@app.route('/create')
+def create():
+    return render_template('create.html')
+
+@app.route('/create/submit')
+def create_submit():
+    pass
+
+@app.route('/import')
+def import_finding():
+    return render_template('import.html')
 
 @app.route('/search/results', methods=['GET', 'POST'])
 def search_request():
