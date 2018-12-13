@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -20,8 +21,18 @@ def create():
 @app.route('/create/submit', methods=['POST'])
 def create_submit():
     # take the form and send it to elastic
-    print(request.form.to_dict(flat=False))
-    pass
+    document={}
+    document["url"] = request.form["inputUrl"]
+    document["forumname"] = request.form["inputMarket"]
+    document["vendorname"] = request.form["inputVendor"]
+    document["category"] = request.form["inputCategory"]
+    document["keywords"] = request.form["inputKeywords"].split(', ')
+    document["summary"] = request.form["inputSummary"]
+    document["created"] = datetime.now()
+
+    es.index(index="findingstore_index", doc_type="finding_card", body=document)
+    return render_template('create.html')
+     
 
 @app.route('/import')
 def import_finding():
@@ -31,7 +42,7 @@ def import_finding():
 def search_request():
     search_term = request.form["input"]
     res = es.search(
-        index="scrape-sysadmins", 
+        index="findingstore_index", 
         size=20, 
         body={
             "query": {
@@ -39,8 +50,11 @@ def search_request():
                     "query": search_term, 
                     "fields": [
                         "url", 
-                        "title", 
-                        "tags"
+                        "forumname", 
+                        "vendorname",
+                        "category",
+                        "keywords",
+                        "summary"
                     ] 
                 }
             }
