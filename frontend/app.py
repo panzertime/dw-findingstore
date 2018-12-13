@@ -20,6 +20,7 @@ def create():
 @app.route('/create/submit', methods=['POST'])
 def create_submit():
     # take the form and send it to elastic
+    print(request.form.to_dict(flat=False))
     pass
 
 @app.route('/import')
