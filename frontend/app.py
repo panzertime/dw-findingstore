@@ -17,8 +17,9 @@ def search():
 def create():
     return render_template('create.html')
 
-@app.route('/create/submit')
+@app.route('/create/submit', methods=['POST'])
 def create_submit():
+    # take the form and send it to elastic
     pass
 
 @app.route('/import')
