@@ -28,11 +28,27 @@ curl -X PUT "$ELASTIC_HOST:$ELASTIC_PORT/findingstore_index" -H 'Content-Type: a
                     "type": "text"
                 },
                 "text_evidences": {
-                    "type": "text"
+                    "type": "nested",
+                    "properties": {
+                        "file": {
+                            "type": "text"
+                        },
+                        "filename": {
+                            "type": "text"
+                        }
+                    }
                 },
                 "binary_evidences": {
-                    "type": "binary",
-                    "store": true
+                    "type": "nested",
+                    "properties": {
+                        "file": {
+                            "type": "binary",
+                            "store": true
+                        },
+                        "filename": {
+                            "type": "text"
+                        }
+                    }
                 },
                 "created": {
                     "type": "date"
