@@ -4,22 +4,37 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
-    <link rel="icon" href="http://obj-cache.cloud.ruanbekker.com/favicon.ico">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Patua+One">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-    <title>Bookmarks Search</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#cardModal').on('show.bs.modal', function (event) {
+                console.log("button clicked")
+                var button = $(event.relatedTarget)
+                var cardId = button.data('cardid')
+                var frameUrl = "/card/display?card_id=" + cardId
+                var modal = $(this)
+                modal.find('#cardframe').attr('src', frameUrl)
+            });
+        });
+    </script>
+
+    <title>Findings Search</title>
 
 </head>
 
 <body>
 
+
     <div class="container">
         <div style="background:transparent !important" class="jumbotron">
-            <div style="font-family: 'Pacifico', cursive;">
+            <div style="font-family: 'Patua One', cursive;">
                 <p>
                     <center>
-                        <font size="8">Search for Blog Posts</font>
+                        <font size="8">Search for Finding Cards</font>
                     </center>
                 </p>
             </div>
@@ -30,7 +45,7 @@
                 <input type="text" class="form-control input-lg" name="input" placeholder="Search" autofocus>
                 <div class="input-group-btn">
                     <button class="btn btn-primary btn-lg" type="submit">
-                        <i class="glyphicon glyphicon-search"></i>
+                        Search
                     </button>
                 </div>
             </div>
@@ -43,31 +58,58 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Display Card</th>
                     <th>Date Stamp</th>
-                    <th>Source</th>
-                    <th>Title</th>
-                    <th>Tags</th>
+                    <th>URL</th>
+                    <th>Forum Name</th>
+                    <th>Vendor Name</th>
+                    <th>Category</th>
                 </tr>
             </thead>
 
             {% for hit in res['hits']['hits'] %}
             <tbody>
                 <tr>
-                    <th scope="row">{{ hit['_source']['date'] }}</th>
-                    <td>{{ hit['_index'] }}</td>
-                    <td><a href="{{ hit['_source']['url'] }}">{{ hit['_source']['title'] }}</a></td>
-                    <td>{{ hit['_source']['tags'] }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardModal"
+                            data-cardid="{{ hit['_id'] }}">
+                            Display
+                        </button></td>
+                    <td>{{ hit['_source']['created'] }}</td>
+                    <td>{{ hit['_source']['url'] }}</td>
+                    <td>{{ hit['_source']['forumname'] }}</td>
+                    <td>{{ hit['_source']['vendorname'] }}</td>
+                    <td>{{ hit['_source']['category'] }}</td>
+
                 </tr>
             </tbody>
             {% endfor %}
+
         </table>
 
+        <div class="modal fade" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="cardModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document" style="width: 100%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Finding Card</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body embed-responsive embed-responsive-4by3">
+                        <iframe id="cardframe" class="embed-responsive-item" src="" frameborder="0" allowtransparency="true"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer class="footer">
-            <p>&copy; 2017 Ruan Bekker</p>
+            <p>Open Source.</p>
         </footer>
 
     </div>
-    </div>
+
 </body>
 
 </html>

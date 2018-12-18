@@ -32,7 +32,6 @@ def create_submit():
 
     es.index(index="findingstore_index", doc_type="finding_card", body=document)
     return render_template('create.html')
-     
 
 @app.route('/import')
 def import_finding():
@@ -61,6 +60,22 @@ def search_request():
         }
     )
     return render_template('results.html', res=res )
+
+@app.route('/card/display')
+def display_card():
+    card_id = request.args.get("card_id")
+    res = es.get(index="findingstore_index", doc_type="_all", id=card_id)
+    return render_template('rendered_card.html', res=res)
+
+@app.route('/card/import')
+def import_card():
+    # unzip the card and add to ES
+    pass
+
+@app.route('/card/export')
+def export_card():
+    # zip the card and return it to user
+    pass
 
 if __name__ == '__main__':
     app.secret_key = 'mysecret'

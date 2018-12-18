@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Findingstore</title>
+
+</head>
+
+<body>
+  <form>
+    <fieldset disabled>
+      <div class="container justify-content-center text-center">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputUrl">Finding URL</label>
+            <input type="url" class="form-control" id="inputUrl" name="inputUrl" placeholder="{{ res['_source']['url'] }}">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputMarket">Market Name</label>
+            <input type="text" class="form-control" id="inputMarket" name="inputMarket" placeholder="{{ res['_source']['forumname'] }}">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputVendor">Vendor Name</label>
+            <input type="text" class="form-control" id="inputVendor" name="inputVendor" placeholder="{{ res['_source']['vendorname'] }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputMarket">Category</label>
+            <input type="text" class="form-control" id="inputCategory" name="inputCategory" placeholder="{{ res['_source']['category'] }}">
+          </div>
+          <div class="form-group col-md-9">
+            <label for="inputKeywords">Keywords</label>
+            <input type="text" class="form-control" id="inputKeywords" name="inputKeywords" placeholder="{{ res['_source']['keywords'] }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <div class="form-group" id="chooserGroup">
+              <label for="chooserGroup">Attached Evidence</label>
+              <i>Put the files here later</i>
+            </div>
+          </div>
+          <div class="form-group col-md-9">
+            <label for="inputSummary">Translation or Summary</label>
+            <textarea class="form-control rounded-0" id="inputSummary" name="inputSummary" rows="15">{{ res['_source']['summary'] }}</textarea>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</body>
+</html>
