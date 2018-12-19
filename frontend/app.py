@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 from datetime import datetime
 import os
+import base64
 
 app = Flask(__name__)
 es = Elasticsearch(os.environ.get("ES_HOST"), port=os.environ.get("ES_PORT"))
@@ -20,7 +21,6 @@ def create():
 
 @app.route('/create/submit', methods=['POST'])
 def create_submit():
-    # take the form and send it to elastic
     document={}
     document["url"] = request.form["inputUrl"]
     document["forumname"] = request.form["inputMarket"]
@@ -29,6 +29,21 @@ def create_submit():
     document["keywords"] = request.form["inputKeywords"].split(', ')
     document["summary"] = request.form["inputSummary"]
     document["created"] = datetime.now()
+    document["text_evidences"] = []
+    document["binary_evidences"] = []
+
+    for filename in request.files:
+        source = request.files[filename]
+        dest = {}
+        dest["filename"] = source.filename
+        if source.mimetype.startswith('text'):
+            # explicitly use Unicode, otherwise you end up with unparseable bytes
+            dest["file"] = source.read().decode("utf-8")
+            document["text_evidences"].append(dest)
+        else:
+            # read bytes, then Base64 encode, then transform the bytestring into a normal string
+            dest["file"] = base64.b64encode(source.read()).decode()
+            document["binary_evidences"].append(dest)
 
     es.index(index="findingstore_index", doc_type="finding_card", body=document)
     return render_template('create.html')
