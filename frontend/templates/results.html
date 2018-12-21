@@ -16,8 +16,10 @@
                 var button = $(event.relatedTarget)
                 var cardId = button.data('cardid')
                 var frameUrl = "/card/display?card_id=" + cardId
+                var exportUrl = "/card/export?card_id=" + cardId
                 var modal = $(this)
                 modal.find('#cardframe').attr('src', frameUrl)
+                modal.find('#exportbutton').attr('href', exportUrl)
             });
         });
     </script>
@@ -98,6 +100,7 @@
                         <iframe id="cardframe" class="embed-responsive-item" src="" frameborder="0" allowtransparency="true"></iframe>
                     </div>
                     <div class="modal-footer">
+                        <a id="exportbutton" class="btn btn-primary" href="">Export</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
