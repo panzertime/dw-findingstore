@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from elasticsearch import Elasticsearch
 from datetime import datetime
 import os
 import base64
+from zipfile import ZipFile
+from io import BytesIO
+from yaml import load, dump
 
 app = Flask(__name__)
 es = Elasticsearch(os.environ.get("ES_HOST"), port=os.environ.get("ES_PORT"))
@@ -89,8 +92,29 @@ def import_card():
 
 @app.route('/card/export')
 def export_card():
-    # zip the card and return it to user
-    pass
+    card_id = request.args.get("card_id")
+    res = es.get(index="findingstore_index", doc_type="_all", id=card_id)["_source"]
+    file = BytesIO()
+    with ZipFile(file, mode='a') as archive:
+        mani = {}
+        mani["url"] = res["url"]
+        mani["forumname"] = res["forumname"]
+        mani["vendorname"] = res["vendorname"]
+        mani["category"] = res["category"]
+        mani["keywords"] = res["keywords"]
+        mani["summary"] = res["summary"]
+        mani["evidences"] = []
+        for binary in res["binary_evidences"]:
+            mani["evidences"].append({"isBinary": True, "fileName": binary["filename"]})
+        for text in res["text_evidences"]:
+            mani["evidences"].append({"isBinary": False, "fileName": text["filename"]})
+        archive.writestr("manifest.yml", dump(mani, default_flow_style=False))
+        for evidence in res["binary_evidences"]:
+            archive.writestr(evidence["filename"], base64.b64decode(evidence["file"]))
+        for evidence in res["text_evidences"]:
+            archive.writestr(evidence["filename"], evidence["file"])
+    file.seek(0)
+    return send_file(file, mimetype='application/zip', as_attachment=True, attachment_filename='card.zip')
 
 if __name__ == '__main__':
     app.secret_key = 'mysecret'
