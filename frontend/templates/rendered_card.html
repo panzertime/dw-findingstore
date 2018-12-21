@@ -42,7 +42,18 @@
           <div class="form-group col-md-3">
             <div class="form-group" id="chooserGroup">
               <label for="chooserGroup">Attached Evidence</label>
-              <i>Put the files here later</i>
+                <div class="form-group" id="textGroup">
+                    <label for="textGroup">Text Files</label>
+                    {% for file in res['_source']['text_evidences'] %}
+                    <a href="/artifact/download_text?card_id={{ res['_id'] }}&file_num={{ loop.index0 }}">{{ file['filename'] }}</a>
+                    {% endfor %}
+                </div>
+                <div class="form-group" id="binaryGroup">
+                    <label for="binaryGroup">Binary Files</label>
+                    {% for file in res['_source']['binary_evidences'] %}
+                    <a href="/artifact/download_binary?card_id={{ res['_id'] }}&file_num={{ loop.index0 }}">{{ file['filename'] }}</a>
+                    {% endfor %}
+                </div>
             </div>
           </div>
           <div class="form-group col-md-9">

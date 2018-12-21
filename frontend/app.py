@@ -141,6 +141,22 @@ def export_card():
     file.seek(0)
     return send_file(file, mimetype='application/zip', as_attachment=True, attachment_filename='card.zip')
 
+@app.route('/artifact/download_text')
+def download_text():
+    card_id = request.args.get("card_id")
+    file_number = int(request.args.get("file_num"))
+    res = es.get(index="findingstore_index", doc_type="_all", id=card_id, _source_include="text_evidences")["_source"]["text_evidences"][file_number]
+    file = BytesIO(bytes(res["file"], "utf-8"))
+    return send_file(file, as_attachment=True, attachment_filename=res["filename"])
+
+@app.route('/artifact/download_binary')
+def download_binary():
+    card_id = request.args.get("card_id")
+    file_number = int(request.args.get("file_num"))
+    res = es.get(index="findingstore_index", doc_type="_all", id=card_id, _source_include="binary_evidences")["_source"]["binary_evidences"][file_number]
+    file = BytesIO(base64.b64decode(res["file"]))
+    return send_file(file, as_attachment=True, attachment_filename=res["filename"])
+
 if __name__ == '__main__':
     app.secret_key = 'mysecret'
     app.run(host='0.0.0.0', port=os.environ.get("FRONTEND_PORT"))
