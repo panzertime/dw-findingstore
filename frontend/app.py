@@ -85,10 +85,35 @@ def display_card():
     res = es.get(index="findingstore_index", doc_type="_all", id=card_id)
     return render_template('rendered_card.html', res=res)
 
-@app.route('/card/import')
+@app.route('/card/import', methods=['POST'])
 def import_card():
-    # unzip the card and add to ES
-    pass
+    document = {}
+    for filename in request.files:
+        with ZipFile(request.files[filename], mode='r') as archive:
+            print(archive.infolist())
+            with archive.open('manifest.yml') as manifest:
+                mani = load(manifest)
+                document["url"] = mani["url"]
+                document["forumname"] = mani["forumname"]
+                document["vendorname"] = mani["vendorname"]
+                document["category"] = mani["category"]
+                document["keywords"] = mani["keywords"]
+                document["summary"] = mani["summary"]
+                document["created"] = datetime.now()
+                document["text_evidences"] = []
+                document["binary_evidences"] = []
+                for evidence in mani["evidences"]:
+                    to_add = {}
+                    to_add["filename"] = evidence["fileName"]
+                    with archive.open(evidence["fileName"]) as ev:
+                        if evidence["isBinary"]:
+                            to_add["file"] = base64.b64encode(ev.read()).decode()
+                            document["binary_evidences"].append(to_add)
+                        else:
+                            to_add["file"] = ev.read().decode("utf-8")
+                            document["text_evidences"].append(to_add)
+    es.index(index="findingstore_index", doc_type="finding_card", body=document)
+    return render_template('import.html')
 
 @app.route('/card/export')
 def export_card():

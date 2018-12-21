@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Patua+One">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+  <script>
+    $(document).ready(function () {
+          $('.custom-file-input').on('change', function () {
+              var label = $(this).parent().find("label");
+              var fileName = $(this).val();
+              label.text(fileName)
+          });
+      });
+  </script>
+
+  <title>Findingstore</title>
+
+</head>
+
+<body>
+
+  <div class="container justify-content-center text-center">
+    <div style="background:transparent !important" class="jumbotron">
+      <div style="font-family: 'Patua One', cursive;">
+        <p>
+          <center>
+            <font size="8">Import a Finding</font>
+          </center>
+        </p>
+      </div>
+    </div>
+
+    <form action="/card/import" method="post" enctype="multipart/form-data">
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group" id="chooserGroup">
+            <label for="chooserGroup">Attached Evidence</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile1" name="customFile1">
+              <label class="custom-file-label" for="customFile1">Choose file</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group form-row text-center">
+        <div class="col">
+          <div class="input-group-btn">
+            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+          </div>
+        </div>
+        <div class="col">
+          <a class="btn btn-secondary btn-lg" href="/">Back</a>
+        </div>
+      </div>
+    </form>
+
+    <br><br>
+    <footer class="footer">
+      <p>Open Source.</p>
+    </footer>
+
+  </div>
+</body>
+
+</html>
