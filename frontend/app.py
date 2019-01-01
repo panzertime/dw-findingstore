@@ -90,7 +90,6 @@ def import_card():
     document = {}
     for filename in request.files:
         with ZipFile(request.files[filename], mode='r') as archive:
-            print(archive.infolist())
             with archive.open('manifest.yml') as manifest:
                 mani = load(manifest)
                 document["url"] = mani["url"]
