@@ -1,6 +1,6 @@
 # Contributions Welcome
 
-First off, thank you for considering contributing to the Findingstore! This resource is a simple project, but has plenty of room for improvement. Many features of Github's webhook implementation are yet to be built into the Findingstore, and all contributions are welcome.
+First off, thank you for considering contributing to Findingstore! This project is still in its infancy, so all improvements and feedback are welcome.
 
 If you're just looking for quick feedback for an idea or proposal, feel free to open an
 [issue](https://github.com/homedepot/dw-findingstore/issues/new).
@@ -12,8 +12,8 @@ commit-based feedback for a contribution, follow the
 
 ## Contribution Workflow
 
-The Findingstore uses the “fork-and-pull” development model. Follow these steps if
-you want to merge your changes to the Findingstore:
+Findingstore uses the “fork-and-pull” development model. Follow these steps if
+you want to merge your changes to Findingstore:
 
 1. Within your fork of the
    [Findingstore](https://github.com/homedepot/dw-findingstore), create a
