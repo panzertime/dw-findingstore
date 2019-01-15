@@ -6,9 +6,7 @@ If you're just looking for quick feedback for an idea or proposal, feel free to 
 [issue](https://github.com/homedepot/dw-findingstore/issues/new).
 
 Follow the [contribution workflow](#contribution-workflow) for submitting your
-changes to the Findingstore codebase. If you want to receive high-level but still
-commit-based feedback for a contribution, follow the
-[request for comments](#request-for-comments) steps instead.
+changes to the Findingstore codebase.
 
 ## Contribution Workflow
 
@@ -23,9 +21,9 @@ you want to merge your changes to Findingstore:
 3. [Create a pull request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
    against the master branch of the Findingstore repository.
 4. Add a reviewer to your pull request. Work with your reviewer to address any comments and obtain an approval.
-   To update your pull request amend existing commits whenever applicable and
+   To update your pull request, amend existing commits whenever applicable and
    then push the new changes to your pull request branch.
-5. Once the pull request is approved, one of the [maintainers](MAINTAINERS.md). will merge it.
+5. Once the pull request is approved, one of the maintainers will merge it.
 
 ## Contribution Quality Standards
 
