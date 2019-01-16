@@ -5,7 +5,6 @@ certifi==2018.4.16
 chardet==3.0.4
 Click==7.0
 configparser==3.5.0
-dnet==1.12
 elasticsearch==6.3.1
 enum34==1.1.6
 Flask==1.0.2
@@ -17,7 +16,6 @@ google-cloud-core==0.29.1
 google-cloud-storage==1.13.2
 google-resumable-media==0.3.2
 googleapis-common-protos==1.5.5
-hashpumpy==1.2
 idna==2.8
 isort==4.3.4
 itsdangerous==1.1.0
