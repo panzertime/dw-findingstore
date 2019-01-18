@@ -15,7 +15,7 @@
 #    limitations under the License.
 
 # set variables
-export ELASTIC_HOST="localhost"
+export ELASTIC_HOST=$1
 export ELASTIC_PORT="9200"
 
 curl -X PUT "$ELASTIC_HOST:$ELASTIC_PORT/findingstore_index" -H 'Content-Type: application/json' -d'

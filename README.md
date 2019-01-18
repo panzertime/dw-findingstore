@@ -21,9 +21,10 @@ Application works in a Docker container environment.
 1. Use Docker Machine to create a Docker instance.
 `docker-machine create -d "virtualbox" findingstore`
 2. Connect to the Docker daemon.
-`eval $(docker-machine eval findingstore)`
+`eval $(docker-machine env findingstore)`
 3. ES requires a memory bump, so update the Docker service manually.
 `docker-machine ssh findingstore sudo sysctl -w vm.max_map_count=262144`
 4. Use Docker Compose to build and start the application.
 `docker-compose up --build`
 5. After the ES service comes up, run `tools/prep_elastic.sh` to create the FindingStore Index.
+`tools/prep_elastic.sh $(docker-machine ip findingstore)`
