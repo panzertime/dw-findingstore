@@ -12,8 +12,19 @@ This card can then be exported and shared, or simply left in Findingstore to con
 
 ## Running Findingstore
 
-The "tools" directory contains scripts which prepare an environment and run the app.
-1. `setup.sh` locally installs a compatible Elasticsearch instance via Docker. Useful for development
-2. `start_elastic.sh` runs the ES instance installed by `setup.sh`. Useful for development
-3. `prep_elastic.sh` creates Findingstore's index and mapping in ES. Must be run before Findingstore can be used
-4. `start_frontend.sh` loads Findingstore's dependencies (by activating a virtualenv) and runs a development WSGI server. Useful for development, not appropriate for production use
+Application works in a Docker container environment.
+
+### Project Setup
+
+##### Create a Docker Instance in VirtualBox
+
+1. Use Docker Machine to create a Docker instance.
+`docker-machine create -d "virtualbox" findingstore`
+2. Connect to the Docker daemon.
+`eval $(docker-machine env findingstore)`
+3. ES requires a memory bump, so update the Docker service manually.
+`docker-machine ssh findingstore sudo sysctl -w vm.max_map_count=262144`
+4. Use Docker Compose to build and start the application.
+`docker-compose up --build`
+5. After the ES service comes up, run `tools/prep_elastic.sh` to create the FindingStore Index.
+`tools/prep_elastic.sh $(docker-machine ip findingstore)`
