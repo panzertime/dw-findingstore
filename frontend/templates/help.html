@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Patua+One">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Findingstore</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Findingstore</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/create">Create</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/search">Search</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/import">Import</a>
+              </li>
+              <li class="nav-item"> 
+                  <a class="nav-link" href="/help">Help</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+
+  <div class="container justify-content-center text-center">
+    <div style="background:transparent !important" class="jumbotron">
+      <div style="font-family: 'Patua One', cursive;">
+        <p>
+          <center>
+            <font size="8">An Intro to Findingstore</font>
+          </center>
+        </p>
+      </div>
+      <div style="font-family: 'Open Sans', sans-serif;">
+        <p>
+          <center>
+            <font size="6">What is Findingstore For?</font>
+          </center>
+        </p>
+        <p>
+          <center>
+            <font size="4">Findingstore is an application for saving "findings." When you research criminal activity on the dark web, it can be hard to track what various vendors and actors do over time. Findingstore makes it easy to save individual postings, ads, or coversations in an index-card based format. Findings can be categorized by market or venue, criminal actor, and crime type. Findings can be tagged for quick retrieval. Findings have a plain-text description of what was found, and users can attach evidence files (i.e. more text files, screenshots) for later review. Findingstore is backed by Elasticsearch, so all text fields are searchable. Finding cards can also be exported and then imported into other instances of Findingstore, or manually reviewed by an analyst: the export format is human-readable.
+            </font>
+          </center>
+        </p>
+        <p>
+          <center>
+            <font size="6">What can I do with Findingstore?</font>
+          </center>
+        </p>
+        <p class="lead">
+          Remember what you see online
+        </p>
+        <div class="row">
+            <div class="col-8">
+                <p>
+                    <center>
+                        <font size="4">When you're browsing the dark web and find an interesting listing or post, take a screenshot. In Findingstore, create a new card, attach the screenshot, and start filling in the blanks. Copy the text from the listing and dump it directly in the description field, or attach it as an evidence file. Get creative! Make notes that will help you contextualize the finding when you look it up later. Don't forget to add tags for easy searching.</font>
+                    </center>
+                </p>
+            </div>
+            <div class="col-4">
+                <img src='static/images/finding_create.png' class="img-fluid img-thumbnail">Creating a Finding</img>
+            </div>
+
+        </div>
+        
+        <p class="lead">
+          Find connections between what you see
+        </p>
+        <div class="row">
+            <div class="col-4">
+                <img src="static/images/finding_search.png" class="img-fluid img-thumbnail">Searching for Findings</img>
+                
+            </div>
+            <div class="col-8">
+                <p>
+                    <center>
+                        <font size="4">All of the text fields are searchable. This includes textfiles attached to findings as evidence. When searching, you can view individual findings in their native "card" format. If you want, you can download the attached evidence files for review, or you can export the entire card as a Zip file with a human-readable manifest. The exported Zip file can be imported into other instances of Findingstore, or manually reviewed by interested analysts.</font>
+                    </center>
+                </p>
+            </div>
+        </div>
+        <p class="lead">
+          Share your findings with the community
+        </p>
+        <div class="row">
+            <div class="col-8">
+                <p>
+                    <center>
+                        <font size="4">Export cards as Zip archives and share them with your colleagues over your preferred communication channel. Exported cards can be imported directly into other instances of Findingstore, or extracted and reviewed manually. Exported cards contain the original evidence files and a human-readable, YAML-based manifest file that includes the tags, description, and other metadata.</font>
+                    </center>
+                </p>
+            </div>
+            <div class="col-4">
+                <img src="static/images/finding_import.png" class="img-fluid img-thumbnail">Importing a Finding Card</img>
+            </div>
+        </div>
+        <p class="lead">
+            Get started!
+        </p>
+        <a class="btn btn-primary btn-lg" href="/">Go</a>
+        
+      </div>
+      
+    </div>
+
+    <br><br>
+    <footer class="footer">
+      <p>Open Source.</p>
+    </footer>
+
+  </div>
+</body>
+
+</html>

@@ -28,6 +28,12 @@ es = Elasticsearch(os.environ.get("ES_HOST"), port=os.environ.get("ES_PORT"))
 def home():
     return render_template('welcome.html')
 
+
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
 @app.route('/search')
 def search():
     return render_template('search.html')
